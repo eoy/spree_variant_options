@@ -35,14 +35,14 @@ function VariantOptionsSelect(params) {
 	var allow_select_outofstock = params['allow_select_outofstock'];
 	var default_instock = params['default_instock'];
 
-	var variant, divs, inputs, selection = [];
+	var variants = {}, divs, inputs, selection = [];
 
 	function init() {
 		divs = $('#product-variants .variant-options');
 		inputs = divs.find('select');
 		inputs.on('change', update);
-		console.log(options);
-	}			
+		update();
+	}				
   
 	function update() {
 		// x = data[option_type_id][option_value_id][id]
@@ -56,7 +56,12 @@ function VariantOptionsSelect(params) {
 		var matches = get_variants_from_selection(selection);
 		console.log(matches);
 		if(matches.length > 0) {
+			$('#add-to-cart-button').removeAttr('disabled').removeClass('disabled');
 			$('.price').html(matches[0].price)
+			$('#variant_id').val(matches[0].id);
+		}else {
+			console.log("disabling button");
+			$('#add-to-cart-button').attr('disabled', 'disabled').addClass('disabled');
 		}
 	}
 	
