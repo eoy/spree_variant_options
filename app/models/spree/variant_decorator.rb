@@ -11,7 +11,10 @@ Spree::Variant.class_eval do
       :id    => self.id, 
       :count => Spree::StockItem.find_all_by_variant_id(self).sum(&:count_on_hand), 
       :price => number_to_currency(actual_price),
-			:backorderable => Spree::StockItem.where({variant_id: self.id, backorderable: true})  ? true : false
+			:backorderable => Spree::StockItem.where({variant_id: self.id, backorderable: true})  ? true : false,
+      :width => self.width,
+      :height => self.height,
+      :depth => self.depth
     }
   end
     

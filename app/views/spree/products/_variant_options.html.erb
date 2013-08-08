@@ -1,6 +1,6 @@
 <% if @product.has_variants? %>
   <div id="product-variants">
-    <ul id="variant-options-list" class="variant-options-list">				
+    <ul id="variant-options-list" class="variant-options-list">
     <% @product.grouped_option_values.each do |type, values| %>
 				<li class="variant-options">
 					<%= label_tag type.name, type.presentation %>
@@ -8,9 +8,7 @@
 				</li>
     <% end %>
   	</ul>
-		
     <%= hidden_field_tag "products[#{@product.id}]", "", :id => "variant_id", :class => "hidden" %>
-		
     <script type="text/javascript">
     //<![CDATA[
       var variant_options = new VariantOptionsSelect({
@@ -21,6 +19,6 @@
       });
     //]]>
     </script>
-		
+
   </div>
-<% end%>
+<% end %>
